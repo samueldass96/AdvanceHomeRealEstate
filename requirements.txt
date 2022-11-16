@@ -1,4 +1,4 @@
 Django
 Pillow
 django-crispy-forms
-django-filters
+django-filter
