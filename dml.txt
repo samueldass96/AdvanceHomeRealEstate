@@ -1,0 +1,50 @@
+After migrating all models, run the following dml to populate the database with a subset of base data.
+
+Run as follows:
+1 - Open Pycharm
+2 - Load project
+3 - After making all model migrations - double click the db.sqlite3 in the AdvanceHomeRealEstate/core folder
+4 - A database pane will open up on the right hand side of the screen
+5 - On the top right of the pane there is an icon that looks like a window with a "QL" in it, click that
+6 - Select "Default Console"
+7 - Copy and paste the below dml into the console
+8 - Highlight all of the text in the console and click the green "Play" button on the top left of the console window
+9 - This should insert the base data into the tables
+
+DELETE from accounts_listing;
+DELETE from accounts_prop_status;
+DELETE from accounts_property_type;
+DELETE from accounts_subdivision;
+
+Update 'sqlite_sequence'
+Set 'seq' = 0 where name in ('accounts_property_type', 'accounts_listing', 'accounts_prop_status', 'accounts_subdivision');
+
+insert into accounts_subdivision(subdiv_name, subdiv_descr)
+Values ('Millard Park', 'Millard Park Subdivision of City of Omaha');
+
+insert into accounts_subdivision(subdiv_name, subdiv_descr)
+Values ('Cinnamon Creek', 'Cinnamon Creek subdivision of City of Omaha');
+
+insert into accounts_subdivision(subdiv_name, subdiv_descr)
+Values ('Mission Park', 'Mission Park Subdivision of City of Omaha');
+
+insert into accounts_property_type(prop_type_name, prop_type_descr)
+Values ('Single Family', 'Residential Single Family Home');
+
+insert into accounts_property_type(prop_type_name, prop_type_descr)
+Values ('Duplex', 'Multi-Family Duplex');
+
+insert into accounts_property_type(prop_type_name, prop_type_descr)
+Values ('Multi Townhome', 'Multi-Family Townhome');
+
+insert into accounts_prop_status(prop_status, prop_status_descr)
+Values ('Available', 'Property is available for sale');
+
+insert into accounts_prop_status(prop_status, prop_status_descr)
+Values ('Pending', 'Property is still for sale, but an offer is pending on the property');
+
+insert into accounts_prop_status(prop_status, prop_status_descr)
+Values ('Sold', 'Property is no longer for sale and was sold');
+
+insert into accounts_listing(address, city, state, postal, price, description, bathroom_count, bedroom_count, square_footage, prop_status_id, visible, featured, property_type_id, subdivision_id)
+Values ('17602 Jefferson St.', 'Omaha', 'NE', 68135, 400000, 'A house!', 3.5, 5, 4000, 1, false, false, 1, 1);
