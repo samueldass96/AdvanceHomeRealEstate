@@ -1,6 +1,12 @@
 from django.db import models
+from django.urls import reverse
 
-
+class VisibileManager(models.Manager):
+    def get_queryset(self):
+        return super(VisibileManager,
+                     self) \
+                     .get_queryset()\
+                     .filter(visible=True)
 class Listing(models.Model):
 
     address = models.CharField(max_length=250)
@@ -20,10 +26,15 @@ class Listing(models.Model):
     prop_status = models.ForeignKey('accounts.Prop_Status', on_delete=models.CASCADE)
     visible = models.BooleanField()
     featured = models.BooleanField()
+    objects = models.Manager()
+    isVisible = VisibileManager()
 
     def __str__(self):
         return self.address
 
+    def get_absolute_url(self):
+        return reverse('accounts:listing_detail',
+                       args=[self.id])
 
 class Property_Type(models.Model):
     prop_type_name = models.CharField(max_length=30)
@@ -45,3 +56,4 @@ class Subdivision(models.Model):
 
     def __str__(self):
         return self.subdiv_name
+

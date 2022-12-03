@@ -1,0 +1,16 @@
+{% extends "accounts/base.html" %}
+
+{% block title %}{{ listing.address }}{% endblock %}
+
+{% block content %}
+    <h1>{{ listing.address }}, {{ listing.city }}, {{ listing.state }} {{ listing.postal }}</h1>
+<p>
+    Price: {{ listing.price }} <br>
+    Subdivision: {{ listing.subdivision.subdiv_name }}<br>
+    Number of Bedrooms: {{ listing.bedroom_count }}<br>
+    Number of Bathrooms: {{ listing.bathroom_count }}<br>
+    Square Footage: {{ listing.square_footage }}<br>
+    Type: {{ listing.property_type.prop_type_descr  }}<br>
+    Description: {{ listing.description }}<br>
+</p>
+{% endblock %}
