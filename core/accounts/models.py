@@ -57,3 +57,8 @@ class Subdivision(models.Model):
     def __str__(self):
         return self.subdiv_name
 
+class Property_images(models.Model):
+    prop_image_name = models.CharField(max_length=50)
+    listing = models.ForeignKey(Listing,on_delete=models.CASCADE, related_name='listing', default=True)
+    image = models.ImageField(upload_to='Image')
+
